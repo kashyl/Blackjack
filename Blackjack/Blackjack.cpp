@@ -283,7 +283,7 @@ void roundOutcome(Player& player, Player& dealer, char choice) {
 		return;
 	}
 	else if (playerHand > 21) {
-		std::cout << "YOU LOSE " << player.bet << "(player bust) " << compare << "\n\n";
+		std::cout << "YOU LOSE " << player.bet << "$. (player bust) " << compare << "\n\n";
 		return;
 	}
 
@@ -296,7 +296,7 @@ void roundOutcome(Player& player, Player& dealer, char choice) {
 		player.balance += player.bet * 2;
 	}
 	else if (playerHand < dealerHand) {
-		std::cout << "YOU LOSE " << player.bet << "(dealer hand is higher) " << compare << "\n\n";
+		std::cout << "YOU LOSE " << player.bet << "$. (dealer hand is higher) " << compare << "\n\n";
 	}
 }
 
@@ -334,14 +334,14 @@ int main()
 		showHands(player.hand, dealer.hand);
 		std::cout << std::endl;
 
-		//if dealer has ace, ask if player wants insurance
-		if (dealer.hand.cards[0].name.find("Ace") != std::string::npos) {
-			askInsurance(player);
-		}
-
 		//if blackjack, check who won etc. then start next round (back to game loop)
 		if (checkBlackjack(player, dealer, player.insurance, player.insuranceBet) == 1) {
 			continue;
+		}
+
+		//if dealer has ace, ask if player wants insurance
+		if (dealer.hand.cards[0].name.find("Ace") != std::string::npos) {
+			askInsurance(player);
 		}
 
 		//turn loop 
